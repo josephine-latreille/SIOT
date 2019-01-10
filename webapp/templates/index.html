@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+   <head>
+	<title>SIOT data</title>
+
+	<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.3.min.css" type="text/css" />
+
+    <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.3.min.js"></script>
+
+	<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+	<style>
+	body {font-family: 'Poppins';font-size: 22px;
+	}
+
+    	.button {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'Poppins';
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+	body {
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+}
+
+	.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+	h3 {color: #008CBA} /* Blue */
+	</style>
+
+   </head>
+
+   <body>
+
+   		<img src="../static/nyc-tips-etiquette.jpg" width="420">
+
+		<h1> Commute planner for Carrol Gardens , NYC </h1>
+
+		<div class = "body">
+			<form action="/forward" method="post">
+				 <a href=# id=test><button class="button">What will my commute be like today?</button></a>
+			</form>
+		</div>
+
+		<br>
+		{{ post | safe }}
+
+		<h1> How does the commute planner work? </h1>
+
+		<body>The commute planner was built from the analysis of <b> real time data from Carrol Gardens NYC. </b> </body>
+
+		<h3>1. Understanding the data sources</h3>
+
+
+
+		<body>This project required real time data about the weather in an area and the current
+		state of public transportation options in the area. To gather such data two wed based data sources were used:
+		A weather API, Dark sky, and a bus sensing API,
+		the MTA bus time API. API stands for Application Programming Interface. In computer programming,
+		API's are a set of communication protocols and tools that expose objects and actions a developer might need to
+		develop a new application. API’s are available across many platforms and systems.
+
+		<br>
+		<img src="../static/apilogo.png" width="700" class="center">
+
+		</body>
+
+		<h3>2. Exploring possible correlations between the weather and bus movements</h3>
+
+		<body> Here are a few scatter plots that allow us to explore possible correlations between our different variables. </body>
+		<br>
+		<br>
+		<body> The plot bellow highlights the obvious correlation between the distance and number of stops away the bus is. </body>
+
+		<div>
+		{{ script|safe }}
+		{{ div|safe }} </div>
+
+		<body> The plot bellow suggests there is no correlations between temperature and distance. </body>
+
+		<div>
+		{{ script2|safe }}
+		{{ div2|safe }} </div>
+
+
+		<h3>3. Quantifying the significance of the weather</h3>
+
+		<body>Scatter plots are not the only way to identify possible correlations. T-tests revealed that the data had a
+		significant impact on the average distance a bus is at any given time from a carrol gardens bus stop.</body>
+
+		<br>
+		<br>
+
+		<img src="../static/graph.png" width="700" class="center">
+
+		<h3>4. Considering the limitations of the data set</h3>
+
+		<body>Histograms were produced to identify any gaps or outliers in the data as well as study the
+		distribution of different variables. The most important histogram created was for the categorical variable:
+		Icon. Icon is a description of the weather conditions. the histogram bellow shows that the data was collected during a highly
+		snowy week in New York City. The majority of data points have the icon ‘Snow.’ This highlights an important
+		limitation of the data set: the data set is biased towards snowy conditions. For future development, data
+		should be collected in difference weather conditions to create a balanced data set.</body>
+
+		<div>
+		{{ script3|safe }}
+		{{ div3|safe }} </div>
+
+
+
+		<h3>5. Building the commute planner button</h3>
+
+		<body>The button was built to prototype a messaging system for users. When the button is pressed,
+		a random integer is generated. The corresponding data point is found in the data set. Weather
+		and predicted transportation conditions are returned.</body>
+
+		<h3>Thank-you for using the morning commute planner!</h3>
+
+		<p> @2018 Developed by Josephine Latreille</p>
+
+
+	   <script type=text/javascript>
+			$(function() {
+			  $('a#test').bind('click', function() {
+				$.getJSON('/forward',
+					function(data) {
+				  //do nothing
+				});
+				return false;
+			  });
+			});
+		</script>
+
+   </body>
+
+
+</html>
